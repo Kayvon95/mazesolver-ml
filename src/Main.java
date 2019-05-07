@@ -25,11 +25,21 @@ public class Main {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
         });
 
-        maze.getPositionValue(0, 0);
-        maze.getPositionValue(0, 1);
-        maze.getPositionValue(1, 1);
-        maze.getPositionValue(3, 1);
-        maze.getPositionValue(-3, 4);
-        maze.getPositionValue(4, -4);
+// Methods to check maze functionality
+//        System.out.println(maze.getMazeMaxX());
+//        System.out.println(maze.getMazeMaxY());
+//        maze.getPositionValue(0, 17);
+//        maze.getPositionValue(0, 0);
+//        maze.getPositionValue(0, 1);
+//        maze.getPositionValue(1, 1);
+//        maze.getPositionValue(9, 13);
+//        maze.getPositionValue(3, 1);
+//        maze.getPositionValue(-3, 4);
+//        maze.getPositionValue(4, -4);
+//        maze.getPositionValue(15, 1);
+//        maze.getPositionValue(16, 1);
+//        maze.checkForWall(1, 1);
+        maze.getStartingPosition();
+
     }
 }
