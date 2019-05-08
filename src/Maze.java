@@ -33,11 +33,11 @@ public class Maze {
 
     int getPositionValue(int x, int y) {
         if (x < 0 || y < 0 || x >= this.maze.length || y >= this.maze[0].length || y > 16) {
-            System.out.println("Parameters out of bounds");
+//            System.out.println("Parameters out of bounds");
             return 1;
         } else {
             // We ask for x-y but return y-x because of 2d array structure.
-            System.out.println("Cell [" + x + ", " + y + "] has value " + this.maze[y][x]);
+//            System.out.println("Cell [" + x + ", " + y + "] has value " + this.maze[y][x]);
             return this.maze[y][x];
         }
     }

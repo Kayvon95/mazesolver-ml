@@ -11,4 +11,17 @@ public class Population {
     public DNASequence[] getAllSequences() {
         return this.population;
     }
+
+    public void setAllSequences(DNASequence[] dna) {
+        this.population = dna;
+    }
+
+    public DNASequence getSequence(int index) {
+        return this.population[index];
+    }
+
+    public DNASequence setSequence(int index, DNASequence sequence) {
+        return this.population[index] = sequence;
+
+    }
 }

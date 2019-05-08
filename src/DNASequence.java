@@ -9,4 +9,10 @@ public class DNASequence {
         this.chromosomes = chromosomes;
     }
 
+    public int[] getChromosome() {
+        for (int i = 0; i < chromosomes.length; i++) {
+            System.out.println(this.chromosomes[i]);
+        }
+        return this.chromosomes;
+    }
 }
