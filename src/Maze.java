@@ -22,7 +22,7 @@ public class Maze {
 //                System.out.println("@Maze - getStartingPosition(): Looping through maze cell (" + i + ", " + j + ")");
                 if (this.getPositionValue(j, i) == 3) {
                  this.startingPostion = new int[] {i, j};
-                 System.out.println("Starting position = " + Arrays.toString(this.startingPostion));
+//                 System.out.println("Starting position = " + Arrays.toString(this.startingPostion));
                  return new int[] {j, i};
                 }
             }

@@ -38,6 +38,7 @@ public class CrawlerBot {
     public void run() {
         while (true) {
             this.currentMoveCount++;
+//            System.out.println("Move #" + this.currentMoveCount);
             if (this.getNextAction() == 0) {
                 System.out.println("@run: getNextAction = 0");
                 return;
@@ -47,7 +48,7 @@ public class CrawlerBot {
                 return;
             }
             if (this.currentMoveCount > this.movesLimit) {
-                System.out.println("@run: movesLimit reached");
+                System.out.println("@run: the bot has used " + (this.currentMoveCount - 1) + "/" + this.movesLimit + " moves.");
                 return;
             }
             if (this.currentMoveCount > this.chromosomes.length) {
@@ -60,19 +61,37 @@ public class CrawlerBot {
 
     public void senseEnvironment() {
         //Use booleans to log if environments are walls
-        boolean upSensor = false;
-        boolean rightSensor = false;
-        boolean downSensor = false;
-        boolean leftSensor = false;
+        boolean upWallSensor = false;
+        boolean rightWallSensor = false;
+        boolean downWallSensor = false;
+        boolean leftWallSensor = false;
 
-        if (this.directionAction == Action.UP) {
-            upSensor = this.maze.checkForWall(this.currentXPosition, this.currentYPosition -1);
-            rightSensor = this.maze.checkForWall(this.currentXPosition +1, this.currentYPosition);
-            downSensor = this.maze.checkForWall(this.currentXPosition, this.currentYPosition +1);
-            leftSensor = this.maze.checkForWall(this.currentXPosition -1, this.currentYPosition);
+        if (this.getAction() == Action.UP) {
+            upWallSensor = this.maze.checkForWall(this.currentXPosition, this.currentYPosition -1);
+//            rightWallSensor = this.maze.checkForWall(this.currentXPosition +1, this.currentYPosition);
+//            downWallSensor = this.maze.checkForWall(this.currentXPosition, this.currentYPosition +1);
+//            leftWallSensor = this.maze.checkForWall(this.currentXPosition -1, this.currentYPosition);
         } else if (this.directionAction == Action.RIGHT) {
-
+//            upWallSensor = this.maze.checkForWall(this.currentXPosition +1, this.currentYPosition);
+            rightWallSensor = this.maze.checkForWall(this.currentXPosition +1, this.currentYPosition);
+//            downWallSensor = this.maze.checkForWall(this.currentXPosition, this.currentYPosition +1);
+//            leftWallSensor = this.maze.checkForWall(this.currentXPosition -1, this.currentYPosition);
+        } else if (this.getAction() == Action.DOWN) {
+            downWallSensor = this.maze.checkForWall(this.currentXPosition, this.currentYPosition +1);
+        } else {
+            leftWallSensor = this.maze.checkForWall(this.currentXPosition -1, this.currentYPosition);
         }
+
+        if (upWallSensor) {
+            this.directionAction = Action.RIGHT;
+        } else if (rightWallSensor) {
+           this.directionAction = Action.DOWN;
+        } else if (downWallSensor) {
+            this.directionAction = Action.LEFT;
+        } else if(leftWallSensor) {
+            this.directionAction = Action.UP;
+        }
+
     }
 
     public Action getAction() {
@@ -81,28 +100,28 @@ public class CrawlerBot {
 
     public void executeAction() {
         if (this.getNextAction() == 1) {
-            System.out.println("@executeAction: getNextAction = 1");
+//            System.out.println("@executeAction: getNextAction = 1");
             int currentX = this.currentXPosition;
             int currentY = this.currentYPosition;
 
-
+            this.senseEnvironment();
             if (this.directionAction == Action.UP) {
                 System.out.println("@CrawlerBot - executeAction: direction UP");
                 this.currentYPosition -= 1;
                 if (this.currentYPosition < 0) {
-                    this.currentYPosition = 0;
+                    this.currentYPosition = 1;
                 }
             } else if (this.directionAction == Action.RIGHT) {
                 System.out.println("@CrawlerBot - executeAction: direction RIGHT");
                 this.currentXPosition += 1;
-                if (this.currentXPosition < 0) {
-                    this.currentXPosition = 0;
+                if (this.currentXPosition > 15) {
+                    this.currentXPosition = 15;
                 }
             } else if (this.directionAction == Action.DOWN) {
                 System.out.println("@CrawlerBot - executeAction: direction DOWN");
                 this.currentYPosition += 1;
-                if (this.currentYPosition < 0) {
-                    this.currentYPosition = 0;
+                if (this.currentYPosition > 15) {
+                    this.currentYPosition = 15;
                 }
             } else if (this.directionAction == Action.LEFT) {
                 System.out.println("@CrawlerBot - executeAction: direction LEFT");
